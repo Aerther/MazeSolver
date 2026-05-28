@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
+
+    <title>Maze Solver</title>
+
+    <link rel="stylesheet" href="src/styles/reset.css">
+    <link rel="stylesheet" href="src/styles/index.css">
+    <link rel="stylesheet" href="src/styles/vars.css">
+
+    <script src="src/js/main.js" defer type="module"></script>
+    <script src="src/js/rendering.js" defer type="module"></script>
+    <script src="src/js/limit.js" defer type="module"></script>
+    <script src="src/js/handler.js" defer type="module"></script>
+
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div id="blocks">
+                
+            </div>
+        </main>
+
+        <aside>
+            <section class="title">
+                <h1>Maze Solver</h1>
+            </section>
+
+            <section class="inputs">
+                <div class="height">
+                    <label for="height">Height</label>
+                    <input type="text" name="height" id="height">
+                </div>
+
+                <div class="length">
+                    <label for="length">Length</label>
+                    <input type="text" name="length" id="length">
+                </div>
+
+                <div class="size">
+                    <label for="size">Size (pixels)</label>
+                    <input type="text" name="size" id="size">
+                </div>
+            </section>
+
+            <section class="buttons">
+                <button id="solve" class="solve">Solve</button>
+                <button id="reset" class="reset">Reset</button>
+            </section>
+        </aside>
+    </div>
+</body>
+</html>
