@@ -30,6 +30,28 @@ function blockEventListener(e) {
     e.target.classList.toggle("active");
 }
 
+export function makeGrid(points) {
+    let blocks = document.querySelectorAll(".block");
+
+    blocks.forEach(block => {
+        let row = Number(block.getAttribute("data-row"));
+        let col = Number(block.getAttribute("data-col"));
+
+        let isStart = block.classList.contains("start-block");
+        let isEnd = block.classList.contains("end-block");
+
+        if(isStart || isEnd) return;
+
+        points.forEach(point => {
+            if(point.isPartOfMaze) return;
+
+            if(point.row == row && point.col == col) {
+                block.classList.add("active");
+            };
+        });
+    });
+}
+
 export function addBlocks(blocks, height, length) {
     blocks.innerHTML = "";
 
@@ -47,6 +69,14 @@ export function removeHighlight() {
 
     blocks.forEach(block => {
         block.classList.remove("highlight-block");
+    });
+}
+
+export function removeWalls() {
+    let blocks = document.querySelectorAll(".block");
+
+    blocks.forEach(block => {
+        block.classList.remove("active");
     });
 }
 

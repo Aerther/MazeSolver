@@ -1,7 +1,8 @@
 import { handleIntegerInput } from "./handler.js";
-import { addBlocks, updateLength, updateHeight, updateSize, highlightBlocks, removeHighlight } from "./rendering.js";
+import { addBlocks, updateLength, updateHeight, updateSize, highlightBlocks, removeHighlight, makeGrid, removeWalls } from "./rendering.js";
 import { loadGrid } from "./maze/utils.js";
-import { solveMaze } from "./maze/solver.js";
+import { solveMazeBFS } from "./maze/solver.js";
+import { createMazePrim } from "./maze/maker.js";
 
 let blocks = document.querySelector("#blocks");
 let length = document.querySelector("#length");
@@ -10,6 +11,7 @@ let size = document.querySelector("#size");
 
 let solve = document.querySelector("#solve");
 let reset = document.querySelector("#reset");
+let make = document.querySelector("#make");
 
 let mapLength = getComputedStyle(document.documentElement).getPropertyValue("--length");
 let mapHeight = getComputedStyle(document.documentElement).getPropertyValue("--height");
@@ -48,7 +50,7 @@ solve.addEventListener("click", function(e) {
     console.log("Grid");
     console.log(grid);
 
-    let solution = solveMaze(grid);
+    let solution = solveMazeBFS(grid);
 
     let points = grid.transformSolutionBlockToPoints();
     
@@ -57,6 +59,17 @@ solve.addEventListener("click", function(e) {
 
 reset.addEventListener("click", function(e) {
     addBlocks(blocks, mapHeight, mapLength);
+});
+
+make.addEventListener("click", function(e) {
+    removeHighlight();
+    removeWalls();
+
+    let grid = createMazePrim(mapLength, mapHeight);
+
+    let points = grid.transformGridToPoints();
+
+    makeGrid(points);
 });
 
 addBlocks(blocks, mapHeight, mapLength);

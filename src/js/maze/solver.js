@@ -1,4 +1,4 @@
-export function solveMaze(grid) {
+export function solveMazeBFS(grid) {
     let startBlock = grid.startBlock;
     let endBlock = grid.endBlock;
 
@@ -24,6 +24,36 @@ export function solveMaze(grid) {
         exploreBlock(junctions, blockLeft, block);
         exploreBlock(junctions, blockBottom, block);
         exploreBlock(junctions, blockTop, block);
+
+        //console.log("Junctions");
+        //console.log(junctions);
+    }
+
+    return null;
+}
+
+export function solveMazeDFS(grid) {
+    let startBlock = grid.startBlock;
+    let endBlock = grid.endBlock;
+
+    let junctions = [startBlock];
+    startBlock.visited = true;
+
+    while(junctions.length > 0) {
+        let block = junctions.at(-1);
+        junctions = junctions.slice(0, -1);
+
+        if(block.isEnd) {
+            grid.solution = block;
+
+            return block;
+        }
+
+        let neighbours = grid.getNeighbours(block);
+
+        neighbours.forEach(neighbour => {
+            exploreBlock(junctions, neighbour, block);
+        });
 
         //console.log("Junctions");
         //console.log(junctions);

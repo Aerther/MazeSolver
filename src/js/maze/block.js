@@ -1,5 +1,5 @@
 export class Block {
-    constructor(row, col, isEmpty, isStart, isEnd) {
+    constructor(row, col, isEmpty, isStart = false, isEnd = false) {
         this.row = row;
         this.col = col;
         this.isEmpty = isEmpty;
@@ -9,5 +9,6 @@ export class Block {
 
         this.cameFrom = null;
         this.visited = false;
+        this.isPartOfMaze = false;
     }
 }
